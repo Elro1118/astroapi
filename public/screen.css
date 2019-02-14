@@ -10,3 +10,88 @@ body {
   margin: 0;
   min-height: 100%;
 }
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline;
+}
+h3 {
+  background: #ffc107;
+  padding: 1rem;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  background: #512da8;
+  color: white;
+}
+.left-button {
+  background: #ffc107;
+  /* margin: 5rem 0rem 5rem 0rem; */
+  width: 10rem;
+  height: 5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.right-button {
+  background: #ffc107;
+  /* margin: 5rem 0rem 5rem 5rem; */
+  width: 10rem;
+  height: 5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+.article {
+  background: #d1c4e9;
+  /* margin: 1rem;
+  padding: 1rem; */
+}
+.articleSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1rem 0rem 1rem 0rem;
+}
+.missionSection {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: lightslategray;
+}
+.articleParagraph {
+  width: 55rem;
+  padding: 1rem;
+}
+.missionParagraph {
+  width: 30em;
+}
+.left-button-section {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.right-button-section {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.pictureTitle {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
