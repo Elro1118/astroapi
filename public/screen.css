@@ -7,6 +7,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-flow: column wrap;
   margin: 0;
   min-height: 100%;
 }
@@ -23,32 +25,43 @@ h3 {
   padding: 1rem;
 }
 
+footer {
+  text-align: center;
+  background: #512da8;
+  padding: 1rem;
+}
+
+img {
+  width: 100%;
+}
+
 .navigation {
   display: flex;
   justify-content: space-between;
   background: #512da8;
   color: white;
 }
+
 .left-button {
   background: #ffc107;
-  /* margin: 5rem 0rem 5rem 0rem; */
-  width: 10rem;
+  width: 8rem;
   height: 5rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 .right-button {
   background: #ffc107;
-  /* margin: 5rem 0rem 5rem 5rem; */
-  width: 10rem;
+  width: 8rem;
   height: 5rem;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 .article {
-  background: #d1c4e9;
-  /* margin: 1rem;
-  padding: 1rem; */
+  width: 100%;
+  background: #ededed;
+  margin: 0rem 4rem 0rem 4rem;
+  padding: 0rem 1rem 0rem 1rem;
+  border-radius: 1rem;
 }
 .articleSection {
   display: flex;
@@ -62,12 +75,9 @@ h3 {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: lightslategray;
+  background: #d1c4e9;
 }
-.articleParagraph {
-  width: 55rem;
-  padding: 1rem;
-}
+
 .missionParagraph {
   width: 30em;
 }
@@ -86,12 +96,36 @@ h3 {
 
 .pictureTitle {
   text-align: center;
+  font: 0.1rem; /*16px / 1 sans-serif;*/
+  padding: 0rem;
+  margin: 0rem;
 }
-
-footer {
-  text-align: center;
+.detailsLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 0.1rem solid gray;
 }
-
-img {
-  width: 100%;
+.titleLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.dateLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 0.1rem solid gray;
+}
+.placeLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.details,
+.dateLaunch,
+.site_name_long,
+.articleTitle {
+  padding: 0rem 0rem 0rem 0.5rem;
 }
