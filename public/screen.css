@@ -23,6 +23,7 @@ li {
 h3 {
   background: #ffc107;
   padding: 1rem;
+  margin: 0rem;
 }
 
 footer {
@@ -35,8 +36,52 @@ img {
   width: 100%;
 }
 
+a {
+  color: white;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+/* .about:visited {
+  color: white;
+} */
+
+.about:hover {
+  color: black;
+  background: #ffc107;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+.contact:hover {
+  color: black;
+  background: #ffc107;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+#pictureDay {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center; /* locate the picture in the middle */
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10rem;
+}
+.nameSDG {
+  margin: 1rem;
+}
+.menu {
+  display: flex;
+  justify-content: space-around;
+}
+/* li {
+  padding: 1rem;
+} */
+
 .navigation {
   display: flex;
+  align-items: center;
+  align-content: center;
   justify-content: space-between;
   background: #512da8;
   color: white;
@@ -128,4 +173,38 @@ img {
 .site_name_long,
 .articleTitle {
   padding: 0rem 0rem 0rem 0.5rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0;
+    min-height: 100%;
+  }
+  li {
+    padding: 1rem;
+  }
+
+  .left-button {
+    background: #ffc107;
+    width: 5rem;
+    height: 3rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+  .right-button {
+    background: #ffc107;
+    width: 5rem;
+    height: 3rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+
+  .nameSDG {
+    margin: 1rem;
+  }
+  /* .menu {
+    margin: 1rem;
+  } */
 }
