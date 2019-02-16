@@ -33,7 +33,7 @@ const getPicture = () => {
           ? 'no copyright'
           : currentPicture.copyright
       document.querySelector('.pictureTitle').textContent =
-        'Copyright: ' + temp + ' | ' + currentPicture.title
+        'Copyright: ' + temp + ' | title: ' + currentPicture.title
     })
 }
 

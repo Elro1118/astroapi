@@ -24,12 +24,16 @@ h3 {
   background: #ffc107;
   padding: 1rem;
   margin: 0rem;
+  font-size: 1.5rem;
 }
 
 footer {
+  display: flex;
+  justify-content: center;
   text-align: center;
   background: #512da8;
   padding: 1rem;
+  color: #cccccc;
 }
 
 img {
@@ -41,20 +45,16 @@ a {
   padding: 2rem 1rem 2rem 1rem;
 }
 
-/* .about:visited {
-  color: white;
-} */
-
 .about:hover {
   color: black;
   background: #ffc107;
-  padding: 2rem 1rem 2rem 1rem;
+  padding: 2.2rem 1rem 2.2rem 1rem;
 }
 
 .contact:hover {
   color: black;
   background: #ffc107;
-  padding: 2rem 1rem 2rem 1rem;
+  padding: 2.2rem 1rem 2.2rem 1rem;
 }
 
 #pictureDay {
@@ -68,15 +68,13 @@ a {
   padding: 10rem;
 }
 .nameSDG {
-  margin: 1rem;
+  font-size: 1.5rem;
+  text-decoration: none;
 }
 .menu {
   display: flex;
   justify-content: space-around;
 }
-/* li {
-  padding: 1rem;
-} */
 
 .navigation {
   display: flex;
@@ -125,6 +123,9 @@ a {
 
 .missionParagraph {
   width: 30em;
+  font-size: 1.2rem;
+  color: #212121;
+  margin: 0rem 0rem 3rem 0rem;
 }
 .left-button-section {
   display: flex;
@@ -141,7 +142,7 @@ a {
 
 .pictureTitle {
   text-align: center;
-  font: 0.1rem; /*16px / 1 sans-serif;*/
+  font-size: 0.8rem; /*16px / 1 sans-serif;*/
   padding: 0rem;
   margin: 0rem;
 }
@@ -170,9 +171,20 @@ a {
 }
 .details,
 .dateLaunch,
-.site_name_long,
+.site_name_long {
+  padding: 0rem 0rem 0rem 0.5rem;
+}
 .articleTitle {
   padding: 0rem 0rem 0rem 0.5rem;
+  font-size: 1.2rem;
+}
+.missionTitle {
+  font-size: 2rem;
+  color: #212121;
+}
+.secondText {
+  color: #cccccc;
+  padding: 0rem;
 }
 
 @media (max-width: 600px) {
@@ -204,7 +216,21 @@ a {
   .nameSDG {
     margin: 1rem;
   }
-  /* .menu {
-    margin: 1rem;
-  } */
+
+  a {
+    color: white;
+    padding: 2rem 1rem 2rem 1rem;
+  }
+
+  .about:hover {
+    color: black;
+    background: #ffc107;
+    padding: 2rem 1rem 2rem 1rem;
+  }
+
+  .contact:hover {
+    color: black;
+    background: #ffc107;
+    padding: 2rem 1rem 2rem 1rem;
+  }
 }
