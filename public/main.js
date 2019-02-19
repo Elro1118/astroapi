@@ -1,22 +1,68 @@
-let currentLaunchesUpComing = []
-let numberLaunches = 0
+let indexLaunch = 0
 let prevNowDate = null
 
+class MyLaunches {
+  constructor() {
+    this.currentLaunchesUpComing = []
+  }
+
+  getTotalDays(index) {
+    let dateNow = new Date()
+    let DateFuture = new Date(
+      this.currentLaunchesUpComing[index].launch_date_utc
+    )
+    return Math.abs(DateFuture - dateNow)
+  }
+
+  getDetailLaunch(index) {
+    return this.currentLaunchesUpComing[index].details === null
+      ? 'No description available yet.'
+      : this.currentLaunchesUpComing[index].details
+  }
+
+  getSiteNameLaunch(index) {
+    return this.currentLaunchesUpComing[index].launch_site.site_name_long
+  }
+
+  getMissionName(index) {
+    return this.currentLaunchesUpComing[index].mission_name
+  }
+}
+
+class MyPicture {
+  constructor() {
+    this.currentPicture = {}
+  }
+
+  getCopyRight() {
+    return this.currentPicture.copyright === null
+      ? 'Copyright: no copyright'
+      : 'Copyright: ' + this.currentPicture.copyright
+  }
+  getTitle() {
+    return this.currentPicture.title === null
+      ? ' | Title: no title'
+      : ' | Title: ' + this.currentPicture.title
+  }
+}
+
+const MY_LAUNCHES_LIST = new MyLaunches()
+const MY_PICTURE_DAY = new MyPicture()
+
 const getLaunchesUpComing = () => {
-  currentLaunchesUpComing = []
   fetch('https://sdg-astro-api.herokuapp.com/api/SpaceX/launches/upcoming')
     .then(resp => {
       return resp.json()
     })
     .then(launchesUpComing => {
-      currentLaunchesUpComing = launchesUpComing
-      numberLaunches = currentLaunchesUpComing.length - 1
-      displayLaunch(0)
+      MY_LAUNCHES_LIST.currentLaunchesUpComing = launchesUpComing
+
+      displayLaunch(indexLaunch)
     })
 }
 
 const getPicture = () => {
-  let currentPicture = {}
+  // let currentPicture = {}
   fetch('https://sdg-astro-api.herokuapp.com/api/Nasa/apod')
     // getting the response back
     .then(resp => {
@@ -24,81 +70,69 @@ const getPicture = () => {
     })
     // opening the response
     .then(pictureDay => {
-      currentPicture = pictureDay
-      document.getElementById('pictureDay').style.backgroundImage = `url(${
-        currentPicture.url
-      })`
-      let temp =
-        currentPicture.copyright === null
-          ? 'no copyright'
-          : currentPicture.copyright
-      document.querySelector('.pictureTitle').textContent =
-        'Copyright: ' + temp + ' | title: ' + currentPicture.title
+      MY_PICTURE_DAY.currentPicture = pictureDay
+      displayPictureDay()
     })
 }
 
+const displayPictureDay = () => {
+  document.getElementById('pictureDay').style.backgroundImage = `url(${
+    MY_PICTURE_DAY.currentPicture.url
+  })`
+
+  document.querySelector('.pictureTitle').textContent =
+    MY_PICTURE_DAY.getCopyRight() + MY_PICTURE_DAY.getTitle()
+}
+
 const goLeftSide = () => {
-  if (numberLaunches > -1) {
-    displayLaunch(numberLaunches)
+  indexLaunch--
+  if (indexLaunch > -1) {
+    displayLaunch(indexLaunch)
   } else {
-    numberLaunches = currentLaunchesUpComing.length - 1
-    displayLaunch(numberLaunches)
+    indexLaunch = MY_LAUNCHES_LIST.currentLaunchesUpComing.length - 1
+    indexLaunch--
+    displayLaunch(indexLaunch)
   }
-  numberLaunches--
 }
 
 const goRightSide = () => {
-  if (numberLaunches <= currentLaunchesUpComing.length - 1) {
-    displayLaunch(numberLaunches)
+  indexLaunch++
+  if (indexLaunch <= MY_LAUNCHES_LIST.currentLaunchesUpComing.length - 1) {
+    displayLaunch(indexLaunch)
   } else {
-    numberLaunches = 0
-    displayLaunch(numberLaunches)
+    indexLaunch = 0
+    displayLaunch(indexLaunch)
   }
-  numberLaunches++
 }
 
 const displayLaunch = index => {
-  document.querySelector('.articleTitle').textContent =
-    currentLaunchesUpComing[index].mission_name
-  // document.querySelector('.dateLaunch').textContent =
-  getCountDownDate(currentLaunchesUpComing[index].launch_date_utc)
-  document.querySelector('.site_name_long').textContent =
-    currentLaunchesUpComing[index].launch_site.site_name_long
-  let temp =
-    currentLaunchesUpComing[index].details === null
-      ? 'No description available yet.'
-      : currentLaunchesUpComing[index].details
-  document.querySelector('.details').textContent = temp
+  document.querySelector(
+    '.articleTitle'
+  ).textContent = MY_LAUNCHES_LIST.getMissionName(index)
+  getTimeLaunch(MY_LAUNCHES_LIST.getTotalDays(index))
+  document.querySelector(
+    '.site_name_long'
+  ).textContent = MY_LAUNCHES_LIST.getSiteNameLaunch(index)
+  document.querySelector(
+    '.details'
+  ).textContent = MY_LAUNCHES_LIST.getDetailLaunch(index)
 }
 
-const getCountDownDate = myDate => {
+const getTimeLaunch = myDifferentDate => {
+  let days = Math.floor(myDifferentDate / (1000 * 60 * 60 * 24))
+  let hours = Math.floor(
+    (myDifferentDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  )
+  let minutes = Math.floor((myDifferentDate % (1000 * 60 * 60)) / (1000 * 60))
+  let seconds = Math.floor((myDifferentDate % (1000 * 60)) / 1000)
+  getCountDownDate(days, hours, minutes, seconds)
+}
+
+const getCountDownDate = (days, hours, minutes, seconds) => {
   if (prevNowDate) {
     clearInterval(prevNowDate)
   }
-
-  let countDownDate = new Date(myDate).getTime()
-
-  // Update the count down every 1 second
-
   prevNowDate = setInterval(() => {
-    // Get todays date and time
-    let now = new Date().getTime()
-
-    // Find the distance between now and the count down date
-    let distance = countDownDate - now
-
-    // Time calculations for days, hours, minutes and seconds
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24))
-    let hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    )
-
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000)
-
-    // Output the result in an element with id="demo"
-    // document.getElementById('demo').innerHTML =
     document.querySelector('.dateLaunch').textContent =
       days +
       ' day ' +
@@ -108,14 +142,23 @@ const getCountDownDate = myDate => {
       ' minutes ' +
       seconds +
       ' seconds '
-
-    // If the count down is over, write some text
-    if (distance < 0) {
+    seconds--
+    if (seconds <= 0 && minutes > 0) {
+      seconds = 59
+      minutes--
+    } else if (seconds <= 0 && minutes <= 0 && hours > 0) {
+      seconds = 59
+      minutes = 59
+      hours--
+    } else if (seconds <= 0 && minutes <= 0 && hours <= 0 && days > 0) {
+      seconds = 59
+      minutes = 59
+      hours = 23
+      days--
+    } else if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
       clearInterval(prevNowDate)
-      // document.getElementById('demo').innerHTML = 'EXPIRED'
       document.querySelector('.dateLaunch').textContent = 'EXPIRED'
     }
-    console.log(distance)
   }, 1000)
 }
 
